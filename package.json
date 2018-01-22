@@ -1,0 +1,25 @@
+{
+  "name": "gbk.js",
+  "version": "0.0.1",
+  "description": "一个小而快的GBK库,支持浏览器",
+  "main": "gbk.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnwhy/nzh.git"
+  },
+  "keywords": [
+    "gbk"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/browserify ./browser-source/gbk.js > ./dist/gbk.js"
+  },
+  "author": {
+    "name": "cnwhy",
+    "email": "w.why@163.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^15.2.0"
+  }
+}
