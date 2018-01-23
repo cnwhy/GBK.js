@@ -62,17 +62,21 @@ var GBK = function () {
 		while (b <= e) {
 			i = ~~((b+e)/2);
 			var _i = arr[i][k];
-			if(charCode === _i){
-				return arr[i][v];
-			}else if(_i > charCode){
+			if(_i > charCode){
 				e = --i;
-			}else{
+			}else if(_i < charCode){
 				b = ++i;
+			}else{
+				return arr[i][v];
 			}
 		}
 		return -1;
 	}
-	
+	// var obj = {}
+	// data_sort_unicode.forEach(function(v){
+	// 	obj[v[1]] = v[0];
+	// })
+	console.log(JSON.stringify(data_sort_gbk))
 	return {
 		encode: function (str) {
 			var gbk = [];
@@ -104,3 +108,4 @@ var GBK = function () {
 	};
 }();
 module.exports = GBK;
+
