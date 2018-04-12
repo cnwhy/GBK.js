@@ -1,5 +1,5 @@
 /*!
- * gbk.js v0.0.1
+ * gbk.js v0.1.1
  * Homepage undefined
  * License MIT
  */

@@ -1,6 +1,6 @@
 {
   "name": "gbk.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "一个小而快的GBK库,支持浏览器",
   "main": "gbk.js",
   "files": [
