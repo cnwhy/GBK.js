@@ -1,3 +1,4 @@
+//用二分法的形式 搜索;
 (function (name, factory) {
 	if (typeof define === 'function' && (define.amd || define.cmd)) {
 		define([], factory);
@@ -14,12 +15,13 @@
 	var Fn_unzip = Function("{{unZipFn}}");
 
 	var GBK = function () {
-		function gbkArray(gbk) {
+
+		/**
+		 * 生成按GBk编码顺数排列的编码映射数组
+		 */
+		function getSortGBK(gbk) {
 			var data = []
 			for (var i = 0x81, k = 0; i <= 0xfe; i++) {
-				if (data.length > 0) {
-					data.length += 0x40 + 1;
-				}
 				for (var j = 0x40; j <= 0xfe; j++) {
 					if (
 						(j == 0x7f) ||
@@ -27,41 +29,63 @@
 						((0xaa <= i && i <= 0xaf) && j >= 0xa1) ||
 						(0xf8 <= i && j >= 0xa1)
 					) {
-						data.push(undefined);
 						continue;
 					}
 					var hex = gbk[k++];
 					var key = Fn_Hex_decode(hex);
-					data.push(key ? key : undefined);
+					if (isNaN(key)) continue;
+					data.push([key, i << 8 | j])
 				}
 			}
 			return data;
 		};
-		// 生成按GBk编码顺数排列的编码映射数组
-		var gbk_us = gbkArray(Fn_unzip("{{zipData}}"));
-		var arr_index = 0x8140;
-		return {
-			decode:function (arr) {
-				var str = "";
-				for (var n = 0, max = arr.length; n < max; n++) {
-					var Code = arr[n];
-					if (Code & 0x80) {
-						Code = gbk_us[(Code << 8 | arr[++n]) - 0x8140]
-					}
-					str += String.fromCharCode(Code || 63);
+
+		// 以GBk编码顺数排列的编码映射数组
+		var data_sort_gbk = getSortGBK(Fn_unzip("{{zipData}}"));
+
+		// 以Unicode编码顺序排列的编码映射数组
+		var data_sort_unicode = data_sort_gbk.slice(0).sort(function (a, b) { return a[0] - b[0]; });
+
+		/**
+		 * 查询映射码
+		 * @param {uint32} charCode 
+		 * @param {bool} isgbk 
+		 */
+		function search(charCode, isgbk) {
+			var k = 0,
+				v = 1,
+				arr = data_sort_unicode;
+			isgbk && (k = 1, v = 0, arr = data_sort_gbk);
+
+			// 二分法搜索
+			var i,
+				b = 0,
+				e = arr.length - 1;
+
+			while (b <= e) {
+				i = ~~((b + e) / 2);
+				var _i = arr[i][k];
+				if (_i > charCode) {
+					e = --i;
+				} else if (_i < charCode) {
+					b = ++i;
+				} else {
+					return arr[i][v];
 				}
-				return str;
-			},
-			encode:function(str){
+			}
+			return -1;
+		}
+
+		return {
+			encode: function (str) {
 				var gbk = [];
 				var wh = '?'.charCodeAt(0);
 				for (var i = 0; i < str.length; i++) {
 					var charcode = str.charCodeAt(i);
 					if (charcode < 0x80) gbk.push(charcode)
 					else {
-						var gcode = gbk_us.indexOf(charcode);
+						var gcode = search(charcode)
 						if (~gcode) {
-							gcode += 0x8140;
 							gbk.push(0xFF & (gcode >> 8), 0xFF & gcode);
 						} else {
 							gbk.push(wh);
@@ -69,8 +93,20 @@
 					}
 				}
 				return gbk;
+			},
+			decode: function (arr) {
+				var kb = '', str = "";
+				for (var n = 0, max = arr.length; n < max; n++) {
+					var Code = arr[n];
+					if (Code & 0x80) {
+						Code = search(Code << 8 | arr[++n], true);
+					}
+					str += String.fromCharCode(Code);
+				}
+				return str;
 			}
-		}
+		};
+
 	}();
 	
 	return GBK;

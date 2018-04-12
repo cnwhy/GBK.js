@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "description": "一个小而快的GBK库,支持浏览器",
   "main": "gbk.js",
+  "files": [
+    "src/*",
+    "data/*",
+    "dist/*",
+    "gbk.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/cnwhy/nzh.git"
@@ -11,8 +17,8 @@
     "gbk"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/browserify ./browser-source/gbk.js > ./dist/gbk.js"
+    "test": "node test/gbk_test.js",
+    "build": "gulp"
   },
   "author": {
     "name": "cnwhy",
@@ -20,6 +26,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^15.2.0"
+    "benchmark": "^2.1.4",
+    "browserify": "^15.2.0",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-header": "^2.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-uglify": "^3.0.0",
+    "systemjs": "^0.21.2"
   }
 }
