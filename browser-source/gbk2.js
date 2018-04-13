@@ -76,8 +76,9 @@
 			return -1;
 		}
 
-		return {
+		var gbk = {
 			encode: function (str) {
+				str += '';
 				var gbk = [];
 				var wh = '?'.charCodeAt(0);
 				for (var i = 0; i < str.length; i++) {
@@ -106,7 +107,8 @@
 				return str;
 			}
 		};
-
+		gbk.URI = require('../src/URI')(gbk);
+		return gbk;
 	}();
 	
 	return GBK;

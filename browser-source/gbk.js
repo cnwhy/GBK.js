@@ -40,7 +40,7 @@
 		// 生成按GBk编码顺数排列的编码映射数组
 		var gbk_us = gbkArray(Fn_unzip("{{zipData}}"));
 		var arr_index = 0x8140;
-		return {
+		var gbk = {
 			decode:function (arr) {
 				var str = "";
 				for (var n = 0, max = arr.length; n < max; n++) {
@@ -53,6 +53,7 @@
 				return str;
 			},
 			encode:function(str){
+				str += '';
 				var gbk = [];
 				var wh = '?'.charCodeAt(0);
 				for (var i = 0; i < str.length; i++) {
@@ -71,6 +72,8 @@
 				return gbk;
 			}
 		}
+		gbk.URI = require('../src/URI')(gbk);
+		return gbk;
 	}();
 	
 	return GBK;
