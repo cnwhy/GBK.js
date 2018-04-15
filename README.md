@@ -33,7 +33,7 @@ GBK.URI.encodeURI('https://abc.com/?kk=abv&bb=火车头#top')
 
 #### GBK.URI.encodeURIComponent({String})  转换规则和 `encodeURIComponent` 转换规则和
 ```
-GBK.URI.encodeURI('https://abc.com/?kk=abv&bb=火车头#top')
+GBK.URI.encodeURIComponent('https://abc.com/?kk=abv&bb=火车头#top')
 > https%3A%2F%2Fabc.com%2F%3Fkk%3Dabv%26bb%3D%BB%F0%B3%B5%CD%B7%23top
 ```
 
