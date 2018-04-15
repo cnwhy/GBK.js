@@ -29,12 +29,12 @@ GBK.decode([ 202, 177, 203, 179, 181, 216, 63, 97, 98, 99, 181, 216 ])
 GBK.URI.encodeURI('https://abc.com/?kk=abv&bb=火车头#top')
 > https://abc.com/?kk=abv&bb=%BB%F0%B3%B5%CD%B7#top
 ```
-#### GBK.URI.decodeURI({String})  转换规则和 `decodeURI` 转换规则和
+#### GBK.URI.decodeURI({String})  转换规则和 `decodeURI` 函数一至
 
-#### GBK.URI.encodeURIComponent({String})  转换规则和 `encodeURIComponent` 转换规则和
+#### GBK.URI.encodeURIComponent({String})  转换规则和 `encodeURIComponent` 函数一至
 ```
 GBK.URI.encodeURIComponent('https://abc.com/?kk=abv&bb=火车头#top')
 > https%3A%2F%2Fabc.com%2F%3Fkk%3Dabv%26bb%3D%BB%F0%B3%B5%CD%B7%23top
 ```
 
-#### GBK.URI.decodeURIComponent({String})  转换规则和 `decodeURIComponent` 转换规则和
+#### GBK.URI.decodeURIComponent({String})  转换规则和 `decodeURIComponent` 函数一至
