@@ -2,12 +2,26 @@ var Benchmark = require('benchmark');
 var fs = require('fs');
 var textbuff = fs.readFileSync(__dirname+"/gbk");
 var textbuff_min = fs.readFileSync(__dirname+"/gbk_min");
-var gbks = {
-	'obj     ' : require('../src/gbk_ObjectMap'),
-	'map     ' : require('../src/gbk_Map'),
-	'Array   ' : require('../src/gbk_Array'),
-	'2       ' : require('../src/gbk_2'),
+var iconv = require('iconv-lite');
+
+var iconv_gbk = { 
+	decode: function(arr){
+		return iconv.decode(arr,'gbk');
+	}
 }
+
+
+// console.log(iconv_gbk.decode(textbuff_min));
+// return;
+
+var gbks = {
+	'obj     ' : require('./v_decode/gbk_ObjectMap'),
+	// 'map     ' : require('./v_decode/gbk_Map'),
+	'Array   ' : require('./v_decode/gbk_Array'),
+	'2       ' : require('./v_decode/gbk_2'),
+	'iconv   ' : iconv_gbk,
+}
+
 function addTest(suite,buff){
 	for(var a in gbks){
 		(function(){
@@ -41,7 +55,6 @@ suite
 	// })
 	// run async
 	.run({ 'async': false });
-
 
 console.log('small:')
 var suite1 = new Benchmark.Suite;

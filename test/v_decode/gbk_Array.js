@@ -1,5 +1,5 @@
 "use strict";
-var us = require('../data/gbk_code_arr.json');
+var us = require('../../data/gbk_code_arr.json');
 
 //array对像方法 , 无自定义码
 // console.log('总数:',us.filter(x=>x).length);

@@ -1,4 +1,4 @@
-var gbk_us = require('./data/gbk_code_arr.json');
+var gbk_us = require('../data/gbk_code_arr.json');
 var arr_index = 0x8140; //33088;
 var GBK = function () {
 	var gbk = {
@@ -33,7 +33,6 @@ var GBK = function () {
 			return gbk;
 		}
 	}
-	gbk.URI = require('./src/URI')(gbk);
 	return gbk;
 }();
 module.exports = GBK;

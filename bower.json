@@ -1,10 +1,6 @@
 {
   "name": "gbk.js",
-  "description": "一个经过压缩的GBK库",
   "main": "dist/gbk.js",
-  "authors": [
-    "cnwhy <w.why@163.com>"
-  ],
   "license": "MIT",
   "keywords": [
     "gbk",
@@ -13,12 +9,15 @@
   ],
   "homepage": "https://github.com/cnwhy/GBK.js",
   "ignore": [
-    "**/.*",
+    ".*",
     "browser-source",
     "data",
     "datazip",
     "node_modules",
     "src",
-    "test"
+    "test",
+    "gulpfile.js",
+    "gbk.js",
+    "package.json"
   ]
 }
