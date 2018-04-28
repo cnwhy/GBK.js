@@ -8,9 +8,10 @@
 		throw new Error("加载 " + name + " 模块失败！，请检查您的环境！")
 	}
 }('GBK', function () {
-	// 多进制转换后的数字还原函数
+	// 多进制转换后的数字还原函数 构建时会替换占位符
 	var Fn_Hex_decode = Function("{{decodeFn}}");
-	// 解压Unicode编码字符串函数
+	
+	// 解压Unicode编码字符串函数 构建时会替换占位符
 	var Fn_unzip = Function("{{unZipFn}}");
 
 	var GBK = function () {
@@ -37,11 +38,11 @@
 			}
 			return data;
 		};
-		// 生成按GBk编码顺数排列的编码映射数组
+		// 生成按GBk编码顺数排列的编码映射数组  构建时会替换 zipData 的占位符
 		var gbk_us = gbkArray(Fn_unzip("{{zipData}}"));
 		var arr_index = 0x8140;
 		var gbk = {
-			decode:function (arr) {
+			decode: function (arr) {
 				var str = "";
 				for (var n = 0, max = arr.length; n < max; n++) {
 					var Code = arr[n];
@@ -52,7 +53,7 @@
 				}
 				return str;
 			},
-			encode:function(str){
+			encode: function (str) {
 				str += '';
 				var gbk = [];
 				var wh = '?'.charCodeAt(0);
@@ -75,6 +76,6 @@
 		gbk.URI = require('../src/URI')(gbk);
 		return gbk;
 	}();
-	
+
 	return GBK;
 }))

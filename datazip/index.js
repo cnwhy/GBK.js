@@ -29,7 +29,12 @@ let arr = function () {
 
 var zip = null;
 var zipData,bit;
-for(var i = 40; i <= 80; i++){
+
+/* 筛选最好效果的数位 */
+
+//40进制以下的两字节可能会占三位,不利于压缩  
+//本来最大进制是95位,但占用了6从此字符做为特殊字符, 所以最大89位
+for(var i = 40; i <= 89; i++){
 	var _zip = Zip(Hex(i));
 	_zip.zipData = _zip.zip(_zip.arrHex(arr));
 	// console.log(i,_zip.zipData.length);
@@ -39,6 +44,7 @@ for(var i = 40; i <= 80; i++){
 	}
 	// var _zipData = zip.zip(zip.arrHex(arr));
 }
+
 console.log(bit);
 
 // arr = arr.slice(0,10);
