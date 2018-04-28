@@ -1,5 +1,6 @@
 const map = require('../data/map_gbk-utf8.json');  // GBK标准中有的字符于UTF8码的映射表 总字数 21886
-const zip = require('./zip')
+const Zip = require('./zip')
+const Hex = require('./Hex')
 
 // 获取GBK码区(无自定义码区)的对应UTF8编码
 // 码区参考 https://zh.wikipedia.org/wiki/%E6%B1%89%E5%AD%97%E5%86%85%E7%A0%81%E6%89%A9%E5%B1%95%E8%A7%84%E8%8C%83
@@ -26,13 +27,26 @@ let arr = function () {
 	return arr;
 }();
 
+var zip = null;
+var zipData,bit;
+for(var i = 40; i <= 80; i++){
+	var _zip = Zip(Hex(i));
+	_zip.zipData = _zip.zip(_zip.arrHex(arr));
+	// console.log(i,_zip.zipData.length);
+	if(!zip || zip.zipData.length > _zip.zipData.length){
+		zip = _zip;
+		bit = i;
+	}
+	// var _zipData = zip.zip(zip.arrHex(arr));
+}
+console.log(bit);
+
 // arr = arr.slice(0,10);
-var zipData = zip.zip(zip.arrHex(arr));
 
 module.exports = {
 	data: arr,
 	arrHex: zip.arrHex,
-	zipData: zipData,
+	zipData: zip.zipData,
 	decodeFn: zip.decodeFn,
 	unZipFn: zip.unZipFn,
 	unZip: zip.unZip
