@@ -1,5 +1,5 @@
 "use strict";
-var ua = require('../../data/map_gbk-utf8.json');
+var ua = require('../../data/map_gbk-U.json');
 // javascript object 对像的方式, 无自定义码
 // console.log('映射字數:',Object.keys(ua).length);
 exports.decode = function (arr) {

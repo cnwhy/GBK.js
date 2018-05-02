@@ -5,7 +5,7 @@ var Benchmark = require('benchmark');
 var textbuff = fs.readFileSync(__dirname + "/gbk");
 var textbuff_min = fs.readFileSync(__dirname + "/gbk_min");
 
-var GBK_node = require('../gbk');
+var GBK_node = require('../');
 var gbk_b = systemjs.import(path.join(__dirname, '../dist/gbk.js'))
 var gbk2_b = systemjs.import(path.join(__dirname, '../dist/gbk2.js'))
 
