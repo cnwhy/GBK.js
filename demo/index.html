@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		body {font-size: 14px; line-height: 1.5;}
+		button {line-height:1.5;}
+		#hex { 
+			display:inline-block; 
+			background:#eee; 
+			font-size:12px; font-family: Consolas, Monaco, monospace; 
+			vertical-align: top; 
+			max-width:170px; 
+			max-height:80px; 
+			overflow: auto;
+			
+		}
+		.buttons {line-height:2;}
+		
+	</style>
+	<script src="../dist/gbk.js"></script>
+</head>
+<body>
+	<textarea name="text" id="text" cols="50" rows="5">https://www.baidu.com/s?wd=翻译&ie=gbk</textarea>
+	<div id="hex"></div>
+	<div class="buttons">
+		GBK: <button onclick="text.value = GBK.encode(text.value);">encode(string to Array)</button>
+		<button onclick="text.value = GBK.decode(text.value.split(','))">decode(Array to string)</button><br>
+		URL: <button onclick="text.value = GBK.URI.encodeURI(text.value)">decodeURI</button>
+		<button onclick="text.value = GBK.URI.decodeURI(text.value)">decodeURI</button><br>
+		URL参数: <button onclick="text.value = GBK.URI.encodeURIComponent(text.value)">encodeURIComponent</button>
+		<button onclick="text.value = GBK.URI.decodeURIComponent(text.value)">decodeURIComponent</button>
+	</div>
+	<script>
+		var text = document.getElementById('text');
+		var hex = document.getElementById('hex');
+		
+		var GBK = new Proxy(GBK,{
+			get : function (target, property, receiver) {
+				var attr = Reflect.get(target, property, receiver)
+				if(property == "encode"){
+					return function(){
+						let [...arg] = arguments;
+						var rt = attr.apply(target,arg);
+						hex.innerText = arr2hex(rt);
+						return rt;
+					}
+				}else{
+					hex.innerText = '';
+				}
+				return attr;
+			}
+		})
+
+		var arr2hex = function(arr){
+			return arr.reduce(function(s,v){
+				s += s ? ' ' : '';
+				s += ('00' + v.toString(16)).match(/..$/)[0];
+				return s;
+			},"")
+		}
+
+	</script>
+</body>
+</html>
