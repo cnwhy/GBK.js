@@ -1,6 +1,6 @@
 {
   "name": "gbk.js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "一个小而快的GBK库,支持浏览器",
   "homepage": "https://github.com/cnwhy/GBK.js",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "data/*",
     "dist/*",
     "README.md",
-    "gbk.js"
+    "index.js"
   ],
   "repository": {
     "type": "git",

@@ -1,7 +1,4 @@
-var path = require("path");
 var gulp = require("gulp");
-var UglifyJS = require("uglify-js");
-var browserify = require("gulp-browserify");
 var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
 var clean = require("gulp-clean");
