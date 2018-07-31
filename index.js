@@ -1,3 +1,2 @@
-var gbk = require('./src/gbk')
-gbk.URI = require('./src/URI')(gbk);
-module.exports = gbk;
+var gbk_us = require('./data/gbk_code_arr.json')
+module.exports = require('./src')(gbk_us);
