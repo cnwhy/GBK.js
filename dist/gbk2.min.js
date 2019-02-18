@@ -1,5 +1,5 @@
 /*!
- * gbk.js v0.2.3
+ * gbk.js v0.2.4
  * Homepage https://github.com/cnwhy/GBK.js
  * License MIT
  */
