@@ -4,9 +4,13 @@ var GBK = function (gbk_us) {
 		decode: function (arr) {
 			var str = "";
 			for (var n = 0, max = arr.length; n < max; n++) {
-				var code = arr[n];
-				if (code & 0x80) {
-					code = gbk_us[(code << 8 | arr[++n]) - arr_index]
+				var code = arr[n] & 0xff;
+				if (code > 0x80 && n + 1 < max) {
+					var code1 = arr[n + 1] & 0xff;
+					if(code1 >= 0x40){
+						code = gbk_us[(code << 8 | code1) - arr_index]
+						n++;
+					}
 				}
 				str += String.fromCharCode(code);
 			}
